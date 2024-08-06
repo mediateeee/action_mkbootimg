@@ -43,15 +43,14 @@ jobs:
       run: |
         mkbootimg --kernel kernel --ramdisk ramdisk.img -o boot.img 
 
-    - uses: actions/checkout@v2
-
     - name: Upload to Release
-      uses: CupOfTea696/gh-action-auto-release@v1.0.0
+      uses: softprops/action-gh-release@v1
       with:
-        title: "My bootimg - ${{ github.run_id }}"
-        tag: "${{ github.run_id }}"
-        draft: false
-        file: "./boot.img"
+        files: |
+          ./boot.img
+        name: My_Bootimg-${{ github.run_id }}
+        tag_name: ${{ github.run_id }}
+        body: My bootimg
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         

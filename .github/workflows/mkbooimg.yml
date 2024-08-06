@@ -1,4 +1,4 @@
-name: action mkbootimg
+name: repack bootimg
 
 on:
   push:

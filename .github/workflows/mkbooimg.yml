@@ -1,6 +1,9 @@
 name: action mkbootimg
 
 on:
+  push:
+    branches: [ main ]
+    
   workflow_dispatch:
     inputs:
       KERNEL_URL:
@@ -40,14 +43,15 @@ jobs:
       run: |
         mkbootimg --kernel kernel --ramdisk ramdisk.img -o boot.img 
 
+    - uses: actions/checkout@v2
+
     - name: Upload to Release
-      uses: softprops/action-gh-release@v1
+      uses: CupOfTea696/gh-action-auto-release@v1.0.0
       with:
-        files: |
-          ./boot.img
-        name: TWRP_Device_Tree-${{ github.run_id }}
-        tag_name: ${{ github.run_id }}
-        body: Made boot.img
+        title: "My bootimg - ${{ github.run_id }}"
+        tag: "${{ github.run_id }}"
+        draft: false
+        file: "./boot.img"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         

@@ -40,7 +40,7 @@ jobs:
 
     - name: Start making
       run: |
-        abootimg -x "${{ github.event.inputs.IMG_URL }}.img"
+        abootimg -x "${{ github.event.inputs.IMG_NAME }}.img"
 
     - name: Rename initrd.img
       run: |
